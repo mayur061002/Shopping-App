@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ProductContext } from "../utils/Context";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
+
+  const [products] = useContext(ProductContext);
+
+  let distinct_category = products && products.reduce((acc, cv)=> [...acc, cv.category], [])
+  distinct_category = [...new Set(distinct_category)];
+  // console.log(distinct_category);
+
+  const color = () => {
+    return`rgba(${(Math.random()* 255).toFixed()},${(Math.random()* 255).toFixed()},${(Math.random()* 255).toFixed()}, 0.4)`
+  };
+  // console.log(color())
+
   return (
     
     <nav className="w-[15%] h-full bg-zinc-100 flex flex-col items-center pt-5 ">
@@ -12,26 +26,24 @@ const Nav = () => {
       </a>
       <hr className="my-3 w-[80%] " />
       <h1 className="text-2xl mb-3 w-[80%] bg-red-50  ">Category</h1>
-      <ul className=" w-[80%] ">
-        <li className="mb-3  flex items-center">
-          <span className="w-[10px] h-[10px] mr-2 rounded-full bg-red-500 "></span>
-          cat 1
-        </li>
-        <li className="mb-3  flex items-center">
-          <span className="w-[10px] h-[10px] mr-2 rounded-full bg-blue-500 "></span>
-          cat 1
-        </li>
-        <li className="mb-3  flex items-center">
-          <span className="w-[10px] h-[10px] mr-2 rounded-full bg-green-500 "></span>
-          cat 1
-        </li>
-        <li className="mb-3  flex items-center">
-          <span className="w-[10px] h-[10px] mr-2 rounded-full bg-yellow-500 "></span>
-          cat 1
-        </li>
-      </ul>
+      <div className=" w-[80%] ">
+        {distinct_category.map((cat, ind)=> (
+
+          <Link
+            key={ind} 
+            to={`/?category=${cat}`} className="mb-3  flex items-center">
+            <span style={{backgroundColor: color()}} className="w-[10px] h-[10px] mr-2 rounded-full bg-red-500 "></span>
+            {cat}
+          </Link>
+        ))}
+      </div>
     </nav>
   );
 };
 
 export default Nav;
+
+
+
+
+// stopped at 1:10 ok
