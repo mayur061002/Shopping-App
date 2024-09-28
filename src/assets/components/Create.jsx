@@ -1,6 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { ProductContext } from '../utils/Context'
+import { nanoid } from 'nanoid';
+import { useNavigate } from 'react-router-dom';
 
 const Create = () => {
+
+    const navigate = useNavigate()
+
+    const [products, setproducts] = useContext(ProductContext);
 
     const [title, settitle] = useState("")
     const [image, setimage] = useState("")
@@ -8,9 +15,37 @@ const Create = () => {
     const [price, setprice] = useState("")
     const [description, setdescription] = useState("")
 
+    const AddProductHandler = (e) => {
+        e.preventDefault();
+
+        if( 
+            title.trim().length < 5 ||
+            image.trim().length < 5 || 
+            category.trim().length < 3 || 
+            price.trim().length < 1 || 
+            description.trim().length < 5 )
+            
+            {
+            alert("Each field must have atleast 4 character");
+            return;
+            }
+
+        const product = {
+            id : nanoid(),
+            image,
+            title,
+            category,
+            price,
+            description
+        };
+        setproducts([...products, product]);
+        localStorage.setItem("products", JSON.stringify([...products, product]))
+        navigate("/")
+    }
+
   return (
 
-    <form className='p-[5%] w-screen h-screen flex flex-col items-center '>
+    <form onSubmit={AddProductHandler} className='p-[5%] w-screen h-screen flex flex-col items-center '>
         <h1 className='text-2xl mb-5 w-1/2 '>Add New Products</h1>
 
         <input

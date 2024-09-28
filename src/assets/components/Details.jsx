@@ -6,21 +6,26 @@ import Loading from './Loading';
 
 const Details = () => {
 
+    const [products, setproducts] = useContext(ProductContext);
+
     const [product, setproduct] = useState(null)
     const {id} = useParams();
     console.log(id);
 
-    const getsingleproduct = async () => {
-        try {
-            const { data } = await axios.get(`/products/${id}`)
-            setproduct( data )
-        } catch (error) {
-            console.log(error)
-        }
-    }  
+    // const getsingleproduct = async () => {
+    //     try {
+    //         const { data } = await axios.get(`/products/${id}`)
+    //         setproduct( data )
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }  
     
     useEffect(() => {
-        getsingleproduct()
+        if(!product) {
+            setproduct(products.filter((product) => product.id == id)[0]); 
+        }
+        // getsingleproduct()
     }, []);
     
     return product ? ( 
