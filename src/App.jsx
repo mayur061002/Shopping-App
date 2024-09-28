@@ -3,6 +3,7 @@ import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import Home from './assets/components/Home'
 import Details from './assets/components/Details'
 import "../src/App.css"
+import Create from './assets/components/Create'
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
 
      <Routes>
       <Route path='/' element={<Home/>} />
+      <Route path='/Create' element={<Create/>} />
       <Route path='/details/:id' element={<Details />} />
       
 
