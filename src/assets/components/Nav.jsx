@@ -44,6 +44,3 @@ const Nav = () => {
 export default Nav;
 
 
-
-
-// stopped at 1:10 ok
