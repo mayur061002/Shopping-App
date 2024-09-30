@@ -1,5 +1,5 @@
 import axios from '../utils/Axios';
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react';
 
 
 export const ProductContext = createContext();
@@ -28,6 +28,6 @@ const Context = (props) => {
             {props.children}
         </ProductContext.Provider>
     )
-}
+};
 
-export default Context
+export default Context;

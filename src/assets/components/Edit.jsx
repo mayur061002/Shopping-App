@@ -1,26 +1,26 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ProductContext } from '../utils/Context';
+import { toast } from 'react-toastify';
 
 const Edit = () => {
     
-
     const [products, setproducts] = useContext(ProductContext);
-    const navigate = useNavigate()
-    const {id} = useParams()
+    const navigate = useNavigate();
+    const {id} = useParams();
     const [product, setproduct] = useState({
         title: "",
         image: "",
         category: "",
         price: "",
         description: ""
-    })
+    });
 
     const ChangeHandler = (e) =>{
         // console.log(e.target.name , e.target.value);
         
         setproduct({ ...product, [e.target.name]: e.target.value })
-    }
+    };
 
 
     // const [title, settitle] = useState("")
@@ -32,7 +32,7 @@ const Edit = () => {
 
     useEffect(() => {
         setproduct(products.filter((product) => product.id == id)[0])
-    }, [id])
+    }, [id]);
 
 
     const AddProductHandler = (e) => {
@@ -60,15 +60,18 @@ const Edit = () => {
         // };
 
         const pi = products.findIndex((product) => product.id == id);
-        const copydata = [...products]
-        copydata[pi] = {...products[pi], ...product} 
+        const copydata = [...products];
+        copydata[pi] = {...products[pi], ...product}; 
 
         setproducts(copydata);
         localStorage.setItem(
             "products",
-            JSON.stringify(copydata))
-        navigate(-1)
-    }
+            JSON.stringify(copydata)
+        );
+
+        toast.success("Product Edited Succesfully");
+        navigate(-1);
+    };
 
 
   return (
@@ -135,7 +138,7 @@ const Edit = () => {
         </button>
 
     </form>
-  )
-}
+  );
+};
 
-export default Edit
+export default Edit;

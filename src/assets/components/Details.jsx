@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ProductContext } from '../utils/Context';
 import axios from '../utils/Axios';
 import Loading from './Loading';
+import { toast } from 'react-toastify';
+
 
 const Details = () => {
 
     const navigate = useNavigate()
-
     const [products, setproducts] = useContext(ProductContext);
-
     const [product, setproduct] = useState(null)
     const {id} = useParams();
     console.log(id);
@@ -34,9 +34,14 @@ const Details = () => {
     const ProductDeleteHandler = () => {
         const FilteredProducts = products.filter((product) => product.id !== id)
         setproducts(FilteredProducts);
-        localStorage.setItem("products", JSON.stringify(FilteredProducts));
-        navigate("/")
-    }
+        localStorage.setItem(
+            "products", 
+            JSON.stringify(FilteredProducts)
+        );
+
+        toast.success("Product Deleted succesfully");
+        navigate("/");
+    };
     
     return product ? ( 
       <div className='w-[75%] h-full m-auto p-[10%] items-center flex justify-between max-md:flex-col max-md:w-full  '>
@@ -57,7 +62,7 @@ const Details = () => {
      </div>
     ) : (
         <Loading/>
-    )
-}
+    );
+};
 
-export default Details
+export default Details;

@@ -1,20 +1,20 @@
-import React, { useContext, useState } from 'react'
-import { ProductContext } from '../utils/Context'
+import React, { useContext, useState } from 'react';
+import { ProductContext } from '../utils/Context';
 import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Create = () => {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [products, setproducts] = useContext(ProductContext);
 
-    const [title, settitle] = useState("")
-    const [image, setimage] = useState("")
-    const [category, setcategory] = useState("")
-    const [price, setprice] = useState("")
-    const [description, setdescription] = useState("")
+    const [title, settitle] = useState("");
+    const [image, setimage] = useState("");
+    const [category, setcategory] = useState("");
+    const [price, setprice] = useState("");
+    const [description, setdescription] = useState("");
 
     const AddProductHandler = (e) => {
         e.preventDefault();
@@ -49,7 +49,7 @@ const Create = () => {
 
         toast.success("Product added succesfully")
         navigate("/")
-    }
+    };
 
   return (
 
@@ -111,7 +111,7 @@ const Create = () => {
         </button>
 
     </form>
-  )
-}
+  );
+};
 
-export default Create
+export default Create;

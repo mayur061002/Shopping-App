@@ -1,19 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Nav from './Nav'
-import { Link, useLocation } from 'react-router-dom'
-import { ProductContext } from '../utils/Context'
-import Loading from './Loading'
-import axios from '../utils/Axios'
+import React, { useContext, useEffect, useState } from 'react';
+import Nav from './Nav';
+import { Link, useLocation } from 'react-router-dom';
+import { ProductContext } from '../utils/Context';
+import Loading from './Loading';
+import axios from '../utils/Axios';
 
 const Home = () => {
   
     
   const [products] = useContext(ProductContext);
   const {search} = useLocation();
-  const category = decodeURIComponent(search.split("=")[1])
+  const category = decodeURIComponent(search.split("=")[1]);
   // console.log(category);
 
-  const [filteredproducts, setfilteredproducts] = useState(null)
+  const [filteredproducts, setfilteredproducts] = useState(null);
 
   const getproductcategory = async ()=> {
     try {
@@ -22,7 +22,7 @@ const Home = () => {
     } catch (error) {
       console.log(error)
       
-    }
+    };
   };
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Home = () => {
 
       //  getproductcategory();
       setfilteredproducts(products.filter((product) => product.category == category));
-    }
+    };
 
   }, [category, products])
 
@@ -66,4 +66,4 @@ const Home = () => {
   );
 };
 
-export default Home
+export default Home;
