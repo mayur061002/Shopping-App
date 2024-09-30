@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { ProductContext } from '../utils/Context'
 import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Create = () => {
 
@@ -23,7 +24,8 @@ const Create = () => {
             image.trim().length < 5 || 
             category.trim().length < 3 || 
             price.trim().length < 1 || 
-            description.trim().length < 5 )
+            description.trim().length < 5 
+        )
             
             {
             alert("Each field must have atleast 4 character");
@@ -38,8 +40,14 @@ const Create = () => {
             price,
             description
         };
+
         setproducts([...products, product]);
-        localStorage.setItem("products", JSON.stringify([...products, product]))
+        localStorage.setItem(
+            "products", 
+            JSON.stringify([...products, product])
+        );
+
+        toast.success("Product added succesfully")
         navigate("/")
     }
 
