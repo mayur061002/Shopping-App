@@ -4,11 +4,12 @@ import Home from './assets/components/Home'
 import Details from './assets/components/Details'
 import "../src/App.css"
 import Create from './assets/components/Create'
+import Edit from './assets/components/Edit'
 
 const App = () => {
 
   const { search, pathname} = useLocation();
-  console.log(search, pathname)
+  // console.log(search, pathname)
 
   
   
@@ -25,6 +26,7 @@ const App = () => {
       <Route path='/' element={<Home/>} />
       <Route path='/Create' element={<Create/>} />
       <Route path='/details/:id' element={<Details />} />
+      <Route path='/edit/:id' element={<Edit />} />
       
 
 
